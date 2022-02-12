@@ -1,4 +1,5 @@
 import 'package:componentes_app/providers/menu_providers.dart';
+import 'package:componentes_app/utils/icono_string_util.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
@@ -31,10 +32,11 @@ class HomePage extends StatelessWidget {
     data.forEach((element) {
       final wt = ListTile(
           title: Text(element['texto']),
-          leading: const Icon(
+          leading: getIcon(element['icon']),
+          /*const Icon(
             Icons.account_circle,
             color: Colors.blue,
-          ),
+          ),*/
           trailing: const Icon(
             Icons.keyboard_arrow_right,
             color: Colors.blue,
