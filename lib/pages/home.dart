@@ -1,7 +1,7 @@
 import 'package:componentes_app/providers/menu_providers.dart';
 import 'package:componentes_app/utils/icono_string_util.dart';
 import 'package:flutter/material.dart';
-import 'package:collection/collection.dart';
+//import 'package:collection/collection.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,13 +21,13 @@ class HomePage extends StatelessWidget {
   Widget _lista() {
     return FutureBuilder(
         future: menuProvider.cargarData(),
-        initialData: [],
+        initialData: const [],
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-          return ListView(children: _listaItems(snapshot.data ?? []));
+          return ListView(children: _listaItems(snapshot.data ?? [], context));
         });
   }
 
-  List<Widget> _listaItems(List<dynamic> data) {
+  List<Widget> _listaItems(List<dynamic> data, BuildContext context) {
     final List<Widget> opciones = [];
     data.forEach((element) {
       final wt = ListTile(
@@ -41,10 +41,16 @@ class HomePage extends StatelessWidget {
             Icons.keyboard_arrow_right,
             color: Colors.blue,
           ),
-          onTap: () {});
+          onTap: () {
+            Navigator.pushNamed(context, element['ruta']);
+
+            // final route =
+            //     MaterialPageRoute(builder: (context) => const AlertPage());
+            // Navigator.push(context, route);
+          });
 
       opciones.add(wt);
-      opciones.add(Divider());
+      opciones.add(const Divider());
     });
 
     return opciones;
